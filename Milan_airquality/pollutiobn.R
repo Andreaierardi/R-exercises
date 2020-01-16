@@ -27,13 +27,7 @@ Data = Data[complete.cases(Data),]
 Data
 plot(Data)
 
-install.packages("xts", TRUE)
-xts::is.xts(1)
-library(xts)
 
-#dfX <- xts(Data$valore, as.Date(Data$data, tz="DMY"))
-#dfx
-#apply.daily(dfX, mean)
 ?aggregate
 Data
 test = aggregate(valore~ data+inquinante, Data , mean)
@@ -66,6 +60,16 @@ ggplot(pm10, aes(x=data,y=valore, group=1))+geom_point()+geom_line() + geom_smoo
 
 
 #TIME SERIES-----
+
+install.packages("xts", TRUE)
+xts::is.xts(1)
+library(xts)
+
+#dfX <- xts(Data$valore, as.Date(Data$data, tz="DMY"))
+#dfx
+#apply.daily(dfX, mean)
+
+
 pm10$data= NULL
 
 
