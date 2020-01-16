@@ -7,6 +7,7 @@ devtools::is.devtools(1)
 library(ggplot2)
 ggplot2::is.ggplot2(1)
 
+
 leggo <- read.csv(file="C:/Users/AndreDany/Downloads/Milan_airquality2019.csv", header=TRUE, sep=",")
 #ggplot(Data,aes(displ,hwy,colour=blue)) + geom_point()
 
@@ -38,8 +39,6 @@ Data
 test = aggregate(valore~ data+inquinante, Data , mean)
 test
 
-data.ts = as.ts(test)
-plot(data.ts)
 
 plot(test)
 ggplot(test,aes(test$data, test$valore, colour=test$inquinante)) + geom_point() + facet_wrap(~ test$inquinante, scales = "free")+ geom_smooth(method="lm")
@@ -61,7 +60,18 @@ pm10
 plot(pm10)
 ggplot(pm10, aes(x=data,y=valore, group=1))+geom_point()+geom_line() + geom_smooth(method="lm")
 
+
+
+
+
+
+#TIME SERIES-----
 pm10$data= NULL
+
+
+data.ts = as.ts(test)
+plot(data.ts)
+
 data.ts = as.ts(pm10)
 
 plot(data.ts)
