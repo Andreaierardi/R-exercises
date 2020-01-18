@@ -69,6 +69,9 @@ plot(data.ts)
 
 fit= arima(data.ts, order=c(1,1,1))
 install.packages("forecast")
+fit = auto.arima(data.ts)
+plot(forecast(fit,30))
+
 library(tseries)
 library(forecast)
 accuracy(fit)
