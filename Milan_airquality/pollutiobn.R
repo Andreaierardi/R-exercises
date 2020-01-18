@@ -52,7 +52,7 @@ co = co[,c('data','valore')]
 co
 plot(co)
 ggplot(co, aes(x=data,y=valore, group=1))+geom_point()+geom_line()+ geom_smooth(method="lm")
-
+cots = as.ts(co)
 write.csv(co,"co.csv")
 
 pm10 = subset(test,subset= inquinante=="PM10")
@@ -71,7 +71,18 @@ fit= arima(data.ts, order=c(1,1,1))
 install.packages("forecast")
 fit = auto.arima(data.ts)
 plot(forecast(fit,30))
+forecast(fit,30)
 
+cots
+data.ts
+plot(cots)
+co.ts = as.ts(co)
+co.ts
+
+co.ts
+
+  
+cor(data.ts,cots)
 library(tseries)
 library(forecast)
 accuracy(fit)
