@@ -7,7 +7,7 @@ devtools::is.devtools(1)
 library(ggplot2)
 ggplot2::is.ggplot2(1)
 
-leggo <- read.csv(file="C:/Users/AndreDany/Downloads/Milan_airquality2019.csv", header=TRUE, sep=",")
+leggo <- read.csv(file="C:/Users/andre/Desktop/GitHub/R-exercises/Milan_airquality/Milan_airquality2019.csv", header=TRUE, sep=",")
 #ggplot(Data,aes(displ,hwy,colour=blue)) + geom_point()
 
 Data = leggo
