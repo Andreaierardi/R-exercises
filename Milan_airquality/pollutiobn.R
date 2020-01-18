@@ -7,7 +7,6 @@ devtools::is.devtools(1)
 library(ggplot2)
 ggplot2::is.ggplot2(1)
 
-
 leggo <- read.csv(file="C:/Users/AndreDany/Downloads/Milan_airquality2019.csv", header=TRUE, sep=",")
 #ggplot(Data,aes(displ,hwy,colour=blue)) + geom_point()
 
@@ -27,12 +26,20 @@ Data = Data[complete.cases(Data),]
 Data
 plot(Data)
 
+install.packages("xts", TRUE)
+xts::is.xts(1)
+library(xts)
 
+#dfX <- xts(Data$valore, as.Date(Data$data, tz="DMY"))
+#dfx
+#apply.daily(dfX, mean)
 ?aggregate
 Data
 test = aggregate(valore~ data+inquinante, Data , mean)
 test
 
+data.ts = as.ts(test)
+plot(data.ts)
 
 plot(test)
 ggplot(test,aes(test$data, test$valore, colour=test$inquinante)) + geom_point() + facet_wrap(~ test$inquinante, scales = "free")+ geom_smooth(method="lm")
@@ -45,37 +52,17 @@ co = co[,c('data','valore')]
 co
 plot(co)
 ggplot(co, aes(x=data,y=valore, group=1))+geom_point()+geom_line()+ geom_smooth(method="lm")
-  
+
 write.csv(co,"co.csv")
 
 pm10 = subset(test,subset= inquinante=="PM10")
 pm10 = pm10[,c('data','valore')]
 pm10
+#sas
 plot(pm10)
 ggplot(pm10, aes(x=data,y=valore, group=1))+geom_point()+geom_line() + geom_smooth(method="lm")
 
-
-
-
-
-
-#TIME SERIES-----
-
-install.packages("xts", TRUE)
-xts::is.xts(1)
-library(xts)
-
-#dfX <- xts(Data$valore, as.Date(Data$data, tz="DMY"))
-#dfx
-#apply.daily(dfX, mean)
-
-
 pm10$data= NULL
-
-
-data.ts = as.ts(test)
-plot(data.ts)
-
 data.ts = as.ts(pm10)
 
 plot(data.ts)
