@@ -74,15 +74,17 @@ plot(forecast(fit,30))
 forecast(fit,30)
 
 cots
+co$data= NULL
+cots = as.ts(co)
+
+
+
 data.ts
 plot(cots)
-co.ts = as.ts(co)
-co.ts
 
-co.ts
 
-  
-cor(data.ts,cots)
+cor(data.ts,cots, method=c("pearson", "kendall", "spearman"))
+
 library(tseries)
 library(forecast)
 accuracy(fit)
