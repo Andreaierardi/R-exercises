@@ -10,24 +10,22 @@
 library(shiny)
 
 # Define UI for application that draws a histogram
+
 ui <- fluidPage(
-
-    # Application title
-    titlePanel("Old Faithful Geyser Data"),
-
-    # Sidebar with a slider input for number of bins 
+    titlePanel("Milan pollution 2019"),
     sidebarLayout(
         sidebarPanel(
-            sliderInput("bins",
-                        "Number of bins:",
-                        min = 1,
-                        max = 50,
-                        value = 30)
+            # Dropdown menu for selecting variable from GE data.
+            selectInput("Pollutant:",
+                        label = "Select pollutant type",
+                        choices = c("PM10" = 12, "PM25" = 13),
+                        selected = 13),
+            hr(),
+            helpText("Data from openData comune di Milano")
+            # Default selection
         ),
-
-        # Show a plot of the generated distribution
         mainPanel(
-           plotOutput("distPlot")
+            plotOutput("BarPlot")  
         )
     )
 )
@@ -35,13 +33,12 @@ ui <- fluidPage(
 # Define server logic required to draw a histogram
 server <- function(input, output) {
 
-    output$distPlot <- renderPlot({
-        # generate bins based on input$bins from ui.R
-        x    <- faithful[, 2]
-        bins <- seq(min(x), max(x), length.out = input$bins + 1)
-
-        # draw the histogram with the specified number of bins
-        hist(x, breaks = bins, col = 'darkgray', border = 'white')
+    output$BarPlot <- renderPlot({          
+        # Render a barplot
+        barplot(co, 
+                main=input$region,
+                ylab="Value",
+                xlab="Day")
     })
 }
 
