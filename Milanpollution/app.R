@@ -102,13 +102,14 @@ server <- function(input, output) {
         
         time = poll$data = NULL
         time.ts = as.ts(poll)
-        plot(time.ts)
         fit = auto.arima(time.ts)
-        plot(forecast(fit,input$lag))
+        
         
         # Render a forecast plot
+        plot(forecast(fit,input$lag))
     })
 }
+?plot.forecast
 
 # Run the application 
 shinyApp(ui = ui, server = server)
