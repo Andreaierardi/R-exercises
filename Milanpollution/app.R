@@ -11,18 +11,29 @@ library(shiny)
 library(ggplot2)
 library(forecast)
 library(xts)
+library(ckanr)
+library(httr)
+library(jsonlite)
+library(tidyverse)
 
-
-leggo <- read.csv(file="C:/Users/andre/Desktop/GitHub/R-exercises/Milan_airquality/Milan_airquality2019.csv", header=TRUE, sep=",")
-#ggplot(Data,aes(displ,hwy,colour=blue)) + geom_point()
+url <- paste0("http://dati.comune.milano.it/api/action/",
+              "datastore_search?",
+              "resource_id=698a58e6-f276-44e1-92b1-3d2b81a4ad47&limit=10000")
+page <- GET(url) # API request
+status_code(page) # # Check that the call is successful
+leggo_list <- fromJSON(url)
+leggo <- leggo_list$result$records
 
 Data = leggo
 Data$stazione_id=NULL
-#summary(Data)
+Data$`_id`=NULL
+Data$valore = as.double(Data$valore)
+Data$inquinante = as.factor(Data$inquinante)
 Data = Data[complete.cases(Data),]
-
+Data$data = as.Date(Data$data)
 test = aggregate(valore~ data+inquinante, Data , mean)
-test
+
+
 
 # Define UI for application that draws a histogram
 
